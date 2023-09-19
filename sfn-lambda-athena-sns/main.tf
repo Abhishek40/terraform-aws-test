@@ -310,9 +310,9 @@ resource "aws_iam_policy" "state_machine_policy" {
           "glue:BatchDeletePartition"
         ],
         Resource = [
-          "arn:aws:glue:us-east-1:${data.aws_caller_identity.caller.account_id}:catalog",
-          "arn:aws:glue:us-east-1:${data.aws_caller_identity.caller.account_id}:database/*",
-          "arn:aws:glue:us-east-1:${data.aws_caller_identity.caller.account_id}:table/*/*"
+          "arn:aws:glue:ap-south-1:${data.aws_caller_identity.caller.account_id}:catalog",
+          "arn:aws:glue:ap-south-1:${data.aws_caller_identity.caller.account_id}:database/*",
+          "arn:aws:glue:ap-south-1:${data.aws_caller_identity.caller.account_id}:table/*/*"
         ],
         Effect = "Allow"
       }
