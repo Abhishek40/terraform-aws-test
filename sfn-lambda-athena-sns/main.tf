@@ -115,7 +115,7 @@ resource "aws_iam_role" "data_generation_function" {
 
 resource "aws_iam_policy" "data_generation_function_policy" {
   name = "data_generation_function_policy"
-  
+
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -184,9 +184,9 @@ resource "aws_glue_catalog_database" "start_athena_query_db" {
 }
 
 resource "aws_glue_catalog_table" "aws_glue_catalog_table" {
-  name              = "log"
+  name          = "log"
   database_name = aws_glue_catalog_database.start_athena_query_db.name
-  table_type        = "EXTERNAL_TABLE"
+  table_type    = "EXTERNAL_TABLE"
   parameters = {
     "classification" = "csv"
   }
@@ -326,9 +326,9 @@ resource "aws_iam_role_policy_attachment" "state_machine_custom_policy_attachmen
 }
 
 resource "aws_sfn_state_machine" "sfn_athena" {
-    name     = "state-machine-start-athena-${random_string.random.result}"
-    role_arn = aws_iam_role.state_machine_role.arn
-    definition = templatefile("${path.module}/statemachine/statemachine.asl.json", {
+  name     = "state-machine-start-athena-${random_string.random.result}"
+  role_arn = aws_iam_role.state_machine_role.arn
+  definition = templatefile("${path.module}/statemachine/statemachine.asl.json", {
     data_generation_function = aws_lambda_function.data_generation_function.arn,
     invoke_crawler_function  = aws_lambda_function.invoke_crawler_function.arn,
     aws_athena_workgroup     = aws_athena_workgroup.workgroup_start_athena.name,
